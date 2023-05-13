@@ -1,0 +1,97 @@
+\input{config.tex}
+
+% Weitere benötigte Packages entweder hier hin oder in config.tex 
+% (z.B. falls Reihenfolge zu dort definierten Paketen wichtig ist)
+
+\graphicspath{ {./Bilder/} }
+\addbibresource{library.bib} % Literaturverzeichnis
+
+\input{Subfiles/Abkuerzungsverzeichnis.tex} % Definitionsliste für Acronyme
+
+
+%------------ Dokumentbeginn ----------------------------------------------
+\begin{document}
+
+
+%---- Deckblatt					
+\input{Deckblatt} % Eigene Daten in Deckblatt.tex anpassen
+
+
+%---- Aufgabenstellung
+\includepdf{Aufgabenstellung.pdf}  % Einbinden einer externen pdf in Latex
+
+\pagenumbering{roman} % römische Nummerierung bis zur Einleitung
+\setcounter{page}{2} % Aufgabenstellung war ja schon Seite 1
+
+
+%---- Selbstständigkeitserklärung 
+%\input{Subfiles/Selbststaendigkeitserklaerung.tex} \newpage
+\includepdf{Subfiles/2022_DA-SA_Selbststaendigkeit.pdf} 
+
+%---- Abstrakt
+\input{Abstract_de.tex}	\newpage			% deutsch  	Kurzfassung
+	
+\input{Abstract_en.tex}	\newpage			% englisch  Abstract
+		
+
+%------------  Verzeichnisse ----------------------------------------------
+% Damit "`Inhaltsverzeichnis"' oben rechts erscheint
+\ohead{Inhaltsverzeichnis}
+\doublespacing
+\tableofcontents		% Inhaltsverzeichnis
+\onehalfspacing
+\clearpage
+\ohead{\leftmark}		% Zurücksetzten zu Kapitelanzeige oben rechts
+
+\listoffigures 			% Abbildungsverzeichnis
+\clearpage
+
+\listoftables				% Tabellenverzeichnis
+\clearpage
+
+\printglossary[style=long3col, type=\acronymtype,title=Abkürzungsverzeichnis]
+\clearpage	
+
+
+%------------ Hauptteil ------------------------------------------
+\pagenumbering{arabic}				 	% Arabische Nummerierung
+\setcounter{page}{1}						% Start mit (arabisch nummerierter Seite 1)
+
+% Hier erfolgt die Einbindung der Tex-Dateien									
+\input{Subfiles/Einleitung} \newpage
+\input{Subfiles/medizinische_Grundlagen} \newpage
+
+\input{Subfiles/Stand_der_Technik} \newpage
+\input{Subfiles/Präzisierung_der_Aufgabenstellung} \newpage
+\input{Subfiles/Wahl_der_Metrik} \newpage
+\input{Subfiles/Anwendung_der_Metriken} \newpage
+\input{Subfiles/Ergebnisse} \newpage
+\input{Subfiles/Diskussion} \newpage
+\input{Subfiles/Fazit_und_Ausblick.tex} \newpage
+
+			
+			
+%------------ Literaturverzeichnis -------------------------------
+\pagenumbering{roman}
+
+% Der roman counter wird mit setcounter{page}{1} vor 
+% Subfiles-Einbindung auf 1 zurück gesetzt, soll aber 10 sein
+% um an letzte römische Nummerierung anzuschließen
+\setcounter{page}{10}
+
+\renewcommand*{\bibname}{Quellenverzeichnis}
+\printbibliography
+\clearpage
+
+
+%------------ Anhang ---------------------------------------------
+\appendix
+%Abbildungsnummerierung im Format Kapitel.Nummer
+% \renewcommand{\thefigure}{\Alph{chapter}.\arabic{figure}}
+% \renewcommand{\thesection}{A.\arabic{section}}
+%\pagenumbering{Alph}
+\addchap{Anhang}
+\input{Subfiles/Anhang.tex}
+
+						
+\end{document}

@@ -1,0 +1,163 @@
+%------------ Hinweise --------------------------------------------
+% Um das fertige Dokument zu erstellen, wie folgt vorgehen:
+% 1. pdflatex Diplomarbeit.tex
+% 2. makeindex Diplomarbeit.idx -s Diplomarbeits.ist -t Diplomarbeit.nlg -o Diplomarbeit.nls 
+% (Alternativ sollte auch makeindex Diplomarbeit funktionieren)
+% 3. makeglossaries Diplomarbeit
+% 4. biber Diplomarbeit
+% 5. pdflatex Diplomarbeit.tex
+%
+% Das ganze lässt sich in diversen Editoren (z.B. TeXnicCenter) in fertigen Profilen 
+% speicheren bzw. durch leichte Abwandlung schon vorhandener Profile erreichen. Beim
+% allerersten Aufruf ist der ganze Ablauf zweimal nötig, um alle Referenzen usw.
+% aufzulösen!
+%
+% Die hier geladenene Pakete stellen viele grundlegende Funktionen zur Verfügung. 
+% Alles weitere bitte selbst hinzufügen.
+
+
+%------------ Header --------------------------------------------
+\documentclass[%
+  ngerman,%
+  BCOR=0mm,
+  cdgeometry=yes,
+  numbers=noenddot,
+  paper=a4,
+  listof=totoc, bibliography=totoc,
+]{tudscrreprt}
+\iftutex
+  \usepackage{fontspec}
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage[ngerman=ngerman-x-latest]{hyphsubst}
+\fi
+\setcounter{secnumdepth}{4} % Ueberschriften bis 4. Ebene nummeriert
+\setcounter{tocdepth}{4} 		% Ueberschriften bis 4. Ebene in Inhaltsverzeichnis
+
+
+%------------ Deutsche Anpassungen und Schrift ------------------------------------
+\usepackage[ngerman]{babel}
+\usepackage[style=numeric, backend=biber]{biblatex}
+\usepackage[T1]{fontenc}			 % Font-Encoding, welches Umlaute unterstützt
+\usepackage[utf8]{inputenc} % Tex-Dateien werden ANSI-Kodiert erwartet. Umlaute können direkt im Tex-Dokument verwendet werden
+\usepackage{textcomp}
+\usepackage{gensymb}
+
+\usepackage{csquotes}		% Für biblatex
+\usepackage{lmodern}     			 % Umfangreiche und hübsche Schriftart
+
+\usepackage{caption}    			 % Captions außerhalb von floats erstellen
+\usepackage{upgreek}		 			 % Grichische Einheiten nicht kursiv darstellen
+
+% \usepackage[default]{opensans}
+\usepackage[ngerman]{babel}							% Deutsche Bezeichner
+\addto\captionsngerman{%								% Macht aus der Beschriftung Abbildung --> Abb.
+	\renewcommand{\figurename}{Abb.}%			%
+	\renewcommand{\tablename}{Tab.}%			%
+}
+  
+
+%------------ Grafiken und Abbildungen --------------------------------------------
+\usepackage[pdftex]{graphicx} % Grafiken in pdfLaTeX
+\usepackage{float}						% Das Bild mit [ht] wenn möglich an der Stelle wie im Tex-Dokument ausgeben.
+\pdfinclusioncopyfonts=1 			% Richtige Darstellung der in Matlab erstellten Axenbeschriftungen
+
+\usepackage{subcaption}				% Mehrere Bilder in einer Figure Umgebung mit separaten Bildunterschriften
+
+\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}		% Abbildungsnummerierung im Format Kapitel.Nummer
+
+
+%------------ Formeldarstellung --------------------------------------------
+\usepackage{amsmath}     % Mathematische Befehle
+\usepackage{amssymb}     % Erweiterte math. Symbole lädt implizit amsfonts
+\usepackage{amstext}		 % \text{} im math-modus
+\usepackage{siunitx}		 % Korrektes Verwendung von Einheiten mit \SI{Zahl}{\einheit}
+
+
+%------------ Zeilenabstand und Absätze --------------------------------------------
+\usepackage{setspace}		% Zeilenabstand einstellen
+%\singlespacing					% 1-zeilig (Standard)
+\onehalfspacing					% 1,5-zeilig
+%\doublespacing					% 2-zeilig
+
+\setlength{\parindent}{1em}	% Einrücktiefe von neuen Absätzen
+
+
+%------------ Seitenlayout --------------------------------------------
+\usepackage{geometry}                % Ändern der Seitengeometrie. 
+\usepackage{pdflscape}
+
+%------------ Header und Footer --------------------------------------------
+% Fuß- und Kopfseparierungslinie im scrlayer style. Im plain.scrlayer style nur eine Fußlinie
+\usepackage[headsepline=0.5pt,footsepline=0.5pt,plainfootsepline]{scrlayer-scrpage}
+
+\KOMAoptions{onpsinit=\setstretch{1.2}} % Verhindert die Beeinflussung von header und footer durch spacing Umgebungen
+% \pagestyle{scrheadings}
+
+\ohead{\leftmark}		% Kapitel außen in der Kopfzeile (bei Einsitigem Druck heißt das rechts)
+\ifoot{Studienarbeit Aaron Troll}
+
+% Seitennummer außen in Fußzeile (wird für Kaptielüberschriften und dergleichen automatisch verwendet)
+% '*' heißt, das die Einstellung auch im plain style gilt
+\ofoot*{\thepage}
+\cfoot*{}			% Im scrlayer Style voreingestellte Seitennummer in der Mitte unten entfernen.
+\chead*{} 		% Siehe \cfoot, allerdings für den Header
+\setkomafont{pageheadfoot}{\normalsize} 	% Normale Schrift, nicht kursiv wie voreingestellt
+
+
+%------------ Links im PDF-Dokument -------------------------------------------
+\usepackage[hypertexnames=false]{hyperref}%Verlinkungen des TOC im Dokument machen (3xkompilieren)
+\hypersetup{
+  hypertexnames=false,   % korrekte Numerierung wg. arabisch und römisch
+  colorlinks=true,       % Links werden farbig und nicht umrandet
+  linkcolor=black,       % Linkfarbe
+  citecolor=black,       % Farbe für Zitate
+  urlcolor=black,        % Farbe für Webadressen
+  bookmarksopen=true,    % im Reader wird Gliederung angezeigt
+ %pdfpagelabels=true,    % Nummerierung für PDF-Datei
+            } 
+						
+						
+%------------ Abkürzungsverzeichnis --------------------------------------------
+\usepackage[acronym,toc,nomain,nonumberlist,nopostdot, nogroupskip]{glossaries}
+\renewcommand{\glsnamefont}[1]{\textbf{#1}}
+\makeglossaries
+
+
+%------------ Weitere Packages --------------------------------------------
+\usepackage{url}					% Richtige Onlinezitierung
+\usepackage{rotating}
+\usepackage{pdfpages}			% Um pdf Dateien dem Latex-dokument EINFACH hinzuzufügen 
+
+\usepackage{color}				% Farbige Markierungen setzen\colorbox{yellow}{hervorgehoben}
+\definecolor{dunkelgrau}{rgb}{0.8,0.8,0.8} % Define user colors using the RGB model
+\definecolor{hellgrau}{rgb}{0.90,0.90,0.90}
+\usepackage{colortbl}			% Um die Farben in Tabellen zu verwenden
+
+
+\usepackage{remreset} 		% Paket um den Counter für die Fussnoten zu setzen da diese Ansonsten mit jedem neuen Kapitel 
+													% wieder von 1 beginnen
+
+\makeatletter           	% Ändern der Vorlage erlauben
+\setlength{\@fptop}{0pt}	% floats oben plazieren
+\@addtoreset{figure}{chapter}						%Rücksetzen der Abbildungsnummerierung mit jedem neuen Kapitel
+\@removefromreset{footnote}{chapter}		%Fussnoten vom Rücksetzen bei Beginn eines neuen Kapitel ausschließen
+\makeatother
+
+\Ifpdfoutput{																																			% PDF-Eigenschaften festlegen
+    \hypersetup {																																	%
+        pdftitle={Umsetzung und Bewertung eines Eventdetektors für Beinbewegungen im Schlaf},	% Titel
+        pdfsubject={Studienarbeit},																								% Thema
+        pdfauthor={Aaron Troll},																								%	Autor
+        pdfkeywords={Studienarbeit, TU Dresden}								%	Schlüsselwörter
+    }
+}{}
+
+\pdfminorversion=6
+\DeclareMathOperator{\e}{e}
+
+\usepackage{listings}		% Quellcode Listings mit Syntax-Highlighting \begin{lstlisting}...\end{lstlisting}
+
+\usepackage{scrhack}		% Verbessert Kompatibilität zwischen KOMA-Script und anderen Packages (float, hyperrref etc.)
+
+\makeindex							% Let Latex output a .idx file for makeindex

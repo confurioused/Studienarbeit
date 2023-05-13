@@ -1,0 +1,13 @@
+\chapter{Fazit und Ausblick}\label{chap:Fazit_und_Ausblick}
+
+Aus der vorliegenden Arbeit ging hervor, dass die klassischen Metriken ungeeignet für die Bewertung der Eventdetektoren im Kontext der periodischen Beinbewegungen sind. Diese sind insbesondere ungeeignet, da wichtige Informationen über zeitliche Zusammenhänge verloren gehen, Metriken sich untereinander qualitativ widersprechen können und auch mit trivialen Detektoren perfekte Ergebnisse erzielt werden können.
+
+Es wurde daher ein Kostenfunktional vorgestellt, welches auf dem medizinisch relevanten PLM-Index basiert und die Fehler, die vom Detektor verursacht wurden, quantifiziert darstellt. Die aufgetretenen Fehler konnten sehr gut ($r^{2} = 0.99$) durch das Kostenfunktional erklärt werden. Durch dieses Vorgehen wird eine einfache und eindeutige Vergleichbarkeit ermöglicht, indem jedem Detektor genau ein Gütewert zugewiesen wird. 
+
+Das vorgestellte Kostenfunktional ist besonders dann nützlich, wenn Vergleichswerte existieren, um neu entwickelte Detektoren einordnen zu können. Dafür sollte das Kostenfunktional in zukünftigen Arbeiten auf die bereits existierenden Detektoren angewendet werden und ein neuer Stand der Technik festgelegt werden. Für qualitative Aussagen sollte ein möglichst öffentlich zugänglicher Datensatz definiert werden, an dem alle Detektoren und Metriken angewendet werden können. Im Optimalfall hat dieser Datensatz eine gute manuelle Annotation. Primär ist jedoch wichtig, dass die Qualität des Datensatzes für alle Detektoren gleich ist, damit die Unterschiede in den Datensätzen nicht fälschlicherweise mit in die Bewertung des Detektors einfließen.
+
+
+Für eine Weiterentwicklung des hier vorgestellten Kostenfunktionals sollten insbesondere Grenzfälle betrachtet werden, um herauszufinden, ob es weitere relevante Fehlerquellen gibt, bei denen der Algorithmus nicht erwartungsgemäß funktioniert. 
+
+Die im Kapitel \ref{Verbesserung} präsentierten Ideen können genutzt werden, um einerseits einen Datensatz zu bereinigen, indem Ausreißer gefunden werden können und andererseits fundiertere Aussagen über die Funktionsweise des Detektors zuzulassen. Diese Aussagen sind jedoch nur als Hinweise zu verwenden, an welchen Stellen genauere Untersuchungen lohnenswert sind. Für den verwendeten Detektor konnten keine definitiven Aussagen getätigt werden.
+Die Wirksamkeit der Ideen und die Festlegung von Schwellwerten könnte sich jedoch bei anderen Detektoren als nützlich erweisen und sollte in zukünftigen Arbeiten mithilfe von Experten durchgeführt und überprüft werden.
