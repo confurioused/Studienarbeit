@@ -1,3 +1,7 @@
+# Studienarbeit 
+9th semester 
+code used in the thesis to compare eventdetectors + implementation of a eventdetector 
+includes .tex files of the thesis
 
 "Workhorse.ipynb" is used to iterate through dataset and save manual and automatic annotations, can be used for signal analysis and plotting
 "MetricfromCSV.ipynb" reads manual and automatic annotation from csv to calculate and save metrics 
